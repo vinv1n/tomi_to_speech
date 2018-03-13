@@ -15,7 +15,7 @@ class TextToSpeech:
 
     def read_file(self):
         self.lines = []
-        with open('TextFiles/', 'r') as file_:
+        with open('TextFiles/text.txt', 'r') as file_:
             self.lines = file_.readlines()
         self.create_speech()
 
