@@ -15,7 +15,7 @@ class TextToSpeech:
 
     def read_file(self):
         self.lines = []
-        with open('TextFiles/text.txt', 'r') as file_:
+        with open('TextFiles/text.txt', 'r', encoding='utf-8') as file_:
             self.lines = file_.readlines()
         self.create_speech()
 
@@ -24,8 +24,9 @@ class TextToSpeech:
         final_string = ''
         for i in self.lines:
             final_string += i
+
         engine = pyttsx3.init()
-        engine.setProperty(name='rate', value=150)
+        engine.setProperty(name='rate', value=1000)
         engine.setProperty(name='voice', value='fi')
         engine.setProperty('age', 69)
         engine.say(final_string)
