@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Voi käyttää lähimaksuu
 Voi käyttää lähimaksuu
 Voi käyttää lähimaksuu
@@ -61,3 +62,5 @@ Kiitos en tarvii kuittii
 Kiitos en tarvii kuittii
 Kiitos en tarvii kuittii
 Kiitos en tarvii kuittii
+=======
+>>>>>>> cbfd1db19261cdae8b8d0b43afd4492e3f476db3
