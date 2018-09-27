@@ -1,6 +1,7 @@
 import pyttsx3
 from pyttsx3 import voice
 import sys
+import argparse
 import os
 from gtts import gTTS
 
@@ -11,12 +12,14 @@ class TextToSpeech:
         self.lang = 'fi'
         self.rate = 150
         self.lines = []
-        self.input_file = ''
+        self.output_file = ""
+        self.input_file = ""
 
     def read_file(self):
         self.lines = []
-        with open('TextFiles/text.txt', 'r', encoding='utf-8') as file_:
-            self.lines = file_.readlines()
+        with open(self.input_file, 'r') as f:
+            self.lines = f.readlines()
+
         self.create_speech()
 
     def create_speech(self):
@@ -40,7 +43,10 @@ class TextToSpeech:
         gtt.save(self.input_file + '.mp3')
         os.system('mpg123' + self.input_file + '.mp3')
 
-    def run(self, input_file):
+    def run(self, output_file, input_file):
+        self.output_file = output_file
+        if not os.path.exists(input_file):
+            raise IOError("Invalid path to file")
         self.input_file = input_file
         try:
             self.read_file()
@@ -49,6 +55,20 @@ class TextToSpeech:
                      '???\n'
                      'Profit')
 
+def main():
+    parser = argparse.ArgumentParser(prog="speech")
+    parser.add_argument('--output', help="Name of output file", required=False)
+    parser.add_argument('--input', help="Path to input file")
+    args = vars(parser.parse_args())
+
+    input_file = args.get('input')
+    output_file = 'default'
+    if args.get('output'):
+        output_file = args.get('output')
+    try:
+        TextToSpeech().run(output_file=output_file, input_file=input_file)
+    except IOError as e:
+        print("Error {}".format(e))
+
 if __name__ == '__main__':
-    file = input("output file name:")
-    TextToSpeech().run(file)
+    main()
